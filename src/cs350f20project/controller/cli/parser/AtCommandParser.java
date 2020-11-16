@@ -9,10 +9,10 @@ public class AtCommandParser extends CommandParser{
     public void parse(){
         String secondPart = super.commandText.substring(1).split(" ")[0];
 
-        if(secondPart=="run"){
-
+        if(secondPart.equals("run")){
+            
         }
-        else if(secondPart=="schedule") {
+        else if(secondPart.equals("schedule")) {
 
         }
     }

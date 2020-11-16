@@ -9,13 +9,13 @@ public class DoCommandParser extends CommandParser{
     public void parse(){
 
         String[] commandArr = super.commandText.split(" ");
-        if(commandArr[1]=="select"){
+        if(commandArr[1].equals("select")){
             select();
         }
-        else if(commandArr[1]=="set"){
+        else if(commandArr[1].equals("set")){
             set();
         }
-        else if(commandArr[1]=="brake"){
+        else if(commandArr[1].equals("brake")){
 
         }
 
