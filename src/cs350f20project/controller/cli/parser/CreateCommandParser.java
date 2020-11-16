@@ -6,6 +6,28 @@ public class CreateCommandParser extends CommandParser {
         super(parserHelper, commandText);
     }
     public void parse(){
-        System.out.println(super.commandText);
+
+        String[] commandArr = super.commandText.split(" ");
+        if(commandArr[1]=="power"){
+            power();
+        }
+        else if(commandArr[1]=="stock"){
+            stock();
+        }
+        else if(commandArr[1]=="track"){
+            track();
+        }
+    }
+
+    private void power(){
+
+    }
+
+    private void stock(){
+
+    }
+
+    private void track(){
+
     }
 }

@@ -7,6 +7,26 @@ public class DoCommandParser extends CommandParser{
     }
 
     public void parse(){
-        System.out.println(super.commandText);
+
+        String[] commandArr = super.commandText.split(" ");
+        if(commandArr[1]=="select"){
+            select();
+        }
+        else if(commandArr[1]=="set"){
+            set();
+        }
+        else if(commandArr[1]=="brake"){
+
+        }
+
     }
+
+    private void select(){
+
+    }
+
+    private void set(){
+
+    }
+
 }

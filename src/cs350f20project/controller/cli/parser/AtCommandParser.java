@@ -7,7 +7,14 @@ public class AtCommandParser extends CommandParser{
     }
 
     public void parse(){
-        System.out.println(super.commandText);
+        String secondPart = super.commandText.substring(1).split(" ")[0];
+
+        if(secondPart=="run"){
+
+        }
+        else if(secondPart=="schedule") {
+
+        }
     }
 
 }
