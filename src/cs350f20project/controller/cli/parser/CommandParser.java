@@ -12,7 +12,8 @@ public class CommandParser {
 
     public void parse(){
 
-        System.out.println("our parser!");
+        System.out.println("Alex and Miguel's parser!");
+
         if(commandText.charAt(0)=='@'){
             AtCommandParser acp = new AtCommandParser(parserHelper, commandText);
             acp.parse();
