@@ -2,13 +2,16 @@ package cs350f20project.controller.cli.parser;
 
 public class DoCommandParser extends CommandParser{
 
+    private String commandText;
+
     protected DoCommandParser(MyParserHelper parserHelper, String commandText) {
         super(parserHelper, commandText);
+        this.commandText = commandText;
     }
 
     public void parse(){
 
-        String[] commandArr = super.commandText.split(" ");
+        String[] commandArr = commandText.split(" ");
         if(commandArr[1].equals("select")){
             select();
         }

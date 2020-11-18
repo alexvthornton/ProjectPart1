@@ -2,12 +2,15 @@ package cs350f20project.controller.cli.parser;
 
 public class CreateCommandParser extends CommandParser {
 
+    private String commandText;
+
     protected CreateCommandParser(MyParserHelper parserHelper, String commandText) {
         super(parserHelper, commandText);
+        this.commandText = commandText;
     }
     public void parse(){
 
-        String[] commandArr = super.commandText.split(" ");
+        String[] commandArr = commandText.split(" ");
         if(commandArr[1].equals("power")){
             power();
         }
