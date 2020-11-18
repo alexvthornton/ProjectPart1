@@ -7,7 +7,7 @@ public class CommandParser {
 
     public CommandParser(MyParserHelper parserHelper, String commandText){
         this.parserHelper = parserHelper;
-        this.commands = commandText.toLowerCase().split(";");
+        this.commands = commandText.toLowerCase().replaceAll(" +", " ").split(";");
     }
 
     public void parse(){
@@ -17,7 +17,8 @@ public class CommandParser {
 
         for(int i = 0; i < commands.length; i++) {
 
-            String commandText = commands[i];
+            String commandText = commands[i].trim();
+
             System.out.println(commandText);
 
             if (commandText.charAt(0) == '@') {

@@ -8,6 +8,7 @@ public class CreateCommandParser extends CommandParser {
         super(parserHelper, commandText);
         this.commandText = commandText;
     }
+
     public void parse(){
 
         String[] commandArr = commandText.split(" ");
