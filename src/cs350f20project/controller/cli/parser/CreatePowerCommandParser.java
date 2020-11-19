@@ -8,18 +8,18 @@ public class CreatePowerCommandParser extends CreateCommandParser{
     }
 
     public void parseCatenary(){
-
+        // solve catenary command here
     }
 
     public void parsePole(){
-
+        // solve pole command here
     }
 
     public void parseStation(){
-
+        // solve station command here
     }
 
     public void parseSubstation(){
-
+        // solve substation command here
     }
 }
