@@ -7,7 +7,7 @@ public class CommandParser {
 
     public CommandParser(MyParserHelper parserHelper, String commandText){
         this.parserHelper = parserHelper;
-        this.commands = commandText.toLowerCase().replaceAll(" +", " ").split(";");
+        this.commands = commandText.replaceAll(" +", " ").split(";");
     }
 
     public void parse(){
@@ -19,15 +19,14 @@ public class CommandParser {
 
             String commandText = commands[i].trim();
 
-            System.out.println(commandText);
 
             if (commandText.charAt(0) == '@') {
                 AtCommandParser acp = new AtCommandParser(parserHelper, commandText);
                 acp.parse();
-            } else if (commandText.charAt(0) == 'd') {
+            } else if (commandText.charAt(0) == 'd' || commandText.charAt(0) == 'D' ) {
                 DoCommandParser dcp = new DoCommandParser(parserHelper, commandText);
                 dcp.parse();
-            } else if (commandText.substring(0, 6).equals("create")) {
+            } else if (commandText.substring(0, 6).equalsIgnoreCase("create")) {
                 CreateCommandParser ccp = new CreateCommandParser(parserHelper, commandText);
                 ccp.parse();
             }

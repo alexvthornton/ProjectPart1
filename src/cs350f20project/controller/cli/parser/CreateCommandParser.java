@@ -2,8 +2,8 @@ package cs350f20project.controller.cli.parser;
 
 public class CreateCommandParser extends CommandParser {
 
-    private String commandText;
-    private String[] commandArr;
+    protected String commandText;
+    protected String[] commandArr;
 
     protected CreateCommandParser(MyParserHelper parserHelper, String commandText) {
         super(parserHelper, commandText);
@@ -13,13 +13,13 @@ public class CreateCommandParser extends CommandParser {
 
     public void parse(){
 
-        if(commandArr[1].equals("power")){
+        if(commandArr[1].equalsIgnoreCase("power")){
             power();
         }
-        else if(commandArr[1].equals("stock")){
+        else if(commandArr[1].equalsIgnoreCase("stock")){
             stock();
         }
-        else if(commandArr[1].equals("track")){
+        else if(commandArr[1].equalsIgnoreCase("track")){
             track();
         }
     }
@@ -28,16 +28,16 @@ public class CreateCommandParser extends CommandParser {
 
         CreatePowerCommandParser power = new CreatePowerCommandParser(super.parserHelper, commandText);
 
-        if(commandArr[2].equals("catenary")){
+        if(commandArr[2].equalsIgnoreCase("catenary")){
             power.parseCatenary();
         }
-        else if(commandArr[2].equals("pole")){
+        else if(commandArr[2].equalsIgnoreCase("pole")){
             power.parsePole();
         }
-        else if(commandArr[2].equals("station")){
+        else if(commandArr[2].equalsIgnoreCase("station")){
             power.parseStation();
         }
-        else if(commandArr[2].equals("substation")){
+        else if(commandArr[2].equalsIgnoreCase("substation")){
             power.parseSubstation();
         }
     }
