@@ -7,7 +7,7 @@ public class CommandParser {
 
     public CommandParser(MyParserHelper parserHelper, String commandText){
         this.parserHelper = parserHelper;
-        this.commands = commandText.replaceAll(" +", " ").split(";");
+        this.commands = commandText.replaceAll(" +|\\t+", " ").split(";");
     }
 
     public void parse(){

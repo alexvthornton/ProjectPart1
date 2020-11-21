@@ -45,6 +45,14 @@ public class CreateCommandParser extends CommandParser {
 
     private void stock(){
 
+        CreateStockCommandParser stock = new CreateStockCommandParser(super.parserHelper, commandText);
+
+        if(commandArr[2].equalsIgnoreCase("car")){
+            stock.parseCar();
+        }
+        else if(commandArr[2].equalsIgnoreCase("engine")){
+            stock.parseEngine();
+        }
     }
 
     private void track(){
