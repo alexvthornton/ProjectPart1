@@ -57,5 +57,23 @@ public class CreateCommandParser extends CommandParser {
 
     private void track(){
 
+        CreateTrackCommandParser track = new CreateTrackCommandParser(super.parserHelper, commandText);
+
+        if(commandArr[2].equalsIgnoreCase("curve")){
+            track.parseCurve();
+        }
+        else if(commandArr[2].equalsIgnoreCase("straight")){
+            track.parseStraight();
+        }
+        else if(commandArr[2].equalsIgnoreCase("layout")){
+            track.parseLayout();
+        }
+        else if(commandArr[2].equalsIgnoreCase("roundhouse")){
+            track.parseRoundhouse();
+        }
+        else if(commandArr[2].equalsIgnoreCase("switch")){
+            track.parseSwitch();
+        }
+
     }
 }

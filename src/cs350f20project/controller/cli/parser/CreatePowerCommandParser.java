@@ -11,6 +11,7 @@ import cs350f20project.datatype.CoordinatesDelta;
 import cs350f20project.datatype.Latitude;
 import cs350f20project.datatype.Longitude;
 
+import javax.sound.midi.Soundbank;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class CreatePowerCommandParser extends CreateCommandParser{
         boolean matches = super.commandText.toLowerCase().matches("create power catenary \\w+ with poles \\w+(( \\w+)+)?");
 
         if(!matches) {
-            throw new RuntimeException("Invalid parse catenary command");
+            throw new RuntimeException("Invalid create power catenary command");
         }
 
         String id1 = super.commandArr[3];
@@ -41,10 +42,10 @@ public class CreatePowerCommandParser extends CreateCommandParser{
     }
 
     public void parsePole(){
-        boolean matches = super.commandText.toLowerCase().matches("create power pole \\w+ on track \\w+ distance (\\d+(\\.\\d+)?) from start|finsih");
+        boolean matches = super.commandText.toLowerCase().matches("create power pole \\w+ on track \\w+ distance (\\d+(\\.\\d+)?) from (start|end)");
 
         if(!matches) {
-            System.out.println("Invalid parse pole command");
+            throw new RuntimeException("Invalid create power pole command");
         }
 
         String id1 = super.commandArr[3];
@@ -62,6 +63,12 @@ public class CreatePowerCommandParser extends CreateCommandParser{
     public void parseStation(){
         // create power station firstID reference 34*25'21.4"/45*11'34.2" delta 10.6:9 with substations ID1 ID2 ID3 ID4
 
+        boolean matches = super.commandText.toLowerCase().matches("create power station \\w+ reference (\\d+\\*\\d+'(\\d+(\\.\\d+)?)\"/\\d+\\*\\d+'(\\d+(\\.\\d+)?)\"|\\$\\w+) delta (\\d+(\\.\\d+)?):(\\d+(\\.\\d+)?) with (substations|substation) \\w+(( \\w+)+)?");
+
+        if(!matches) {
+            throw new RuntimeException("Invalid create power station command");
+        }
+
         String id1 = super.commandArr[3];
 
         String [] latAndLon = super.commandArr[5].split("/");
@@ -76,17 +83,6 @@ public class CreatePowerCommandParser extends CreateCommandParser{
 
         for(int i = 10; i < super.commandArr.length; i++){
             idList.add(super.commandArr[i]);
-        }
-
-        System.out.println("id1: " + id1);
-        System.out.println("latitude: " + latAndLon[0]);
-        System.out.println("longitude: " + latAndLon[1]);
-        System.out.println("x: " + x);
-        System.out.println("y: " + y);
-
-        System.out.println("idList: ");
-        for(int i = 0; i < idList.size(); i++){
-            System.out.println(idList.get(i));
         }
 
         A_Command command = new CommandCreatePowerStation(id1, cw, cd, idList);
@@ -96,6 +92,11 @@ public class CreatePowerCommandParser extends CreateCommandParser{
 
     public void parseSubstation(){
         // create power substation firstID reference 34*25'21.4"/45*11'34.2" delta 10.6:9 with catenaries ID1 ID2 ID3 ID4
+        boolean matches = super.commandText.toLowerCase().matches("create power substation \\w+ reference (\\d+\\*\\d+'(\\d+(\\.\\d+)?)\"/\\d+\\*\\d+'(\\d+(\\.\\d+)?)\"|\\$\\w+) delta (\\d+(\\.\\d+)?):(\\d+(\\.\\d+)?) with catenaries \\w+(( \\w+)+)?");
+
+        if(!matches) {
+            throw new RuntimeException("Invalid create power station command");
+        }
 
         String id1 = super.commandArr[3];
 
@@ -113,16 +114,6 @@ public class CreatePowerCommandParser extends CreateCommandParser{
             idList.add(super.commandArr[i]);
         }
 
-        System.out.println("id1: " + id1);
-        System.out.println("latitude: " + latAndLon[0]);
-        System.out.println("longitude: " + latAndLon[1]);
-        System.out.println("x: " + x);
-        System.out.println("y: " + y);
-
-        System.out.println("idList: ");
-        for(int i = 0; i < idList.size(); i++){
-            System.out.println(idList.get(i));
-        }
 
         A_Command command = new CommandCreatePowerSubstation(id1, cw, cd, idList);
         this.parserHelper.getActionProcessor().schedule(command);
