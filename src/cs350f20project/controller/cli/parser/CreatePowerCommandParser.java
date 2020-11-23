@@ -71,8 +71,15 @@ public class CreatePowerCommandParser extends CreateCommandParser{
 
         String id1 = super.commandArr[3];
 
-        String [] latAndLon = super.commandArr[5].split("/");
-        CoordinatesWorld cw = calcCoordWorld(latAndLon[0], latAndLon[1]);
+        CoordinatesWorld cw;
+        if(super.commandArr[5].charAt(0)=='$'){
+            cw = parserHelper.getReference(super.commandArr[5].substring(1));
+            System.out.println("got string");
+        }
+        else {
+            String[] latAndLon = super.commandArr[5].split("/");
+            cw = calcCoordWorld(latAndLon[0], latAndLon[1]);
+        }
 
         String [] coordDelta = super.commandArr[7].split(":");
         Double x = Double.parseDouble(coordDelta[0]);
@@ -101,7 +108,7 @@ public class CreatePowerCommandParser extends CreateCommandParser{
         String id1 = super.commandArr[3];
 
         String [] latAndLon = super.commandArr[5].split("/");
-        CoordinatesWorld cw = calcCoordWorld(latAndLon[0], latAndLon[1]);
+        CoordinatesWorld cw = super.calcCoordWorld(latAndLon[0], latAndLon[1]);
 
         String [] coordDelta = super.commandArr[7].split(":");
         Double x = Double.parseDouble(coordDelta[0]);
@@ -119,21 +126,5 @@ public class CreatePowerCommandParser extends CreateCommandParser{
         this.parserHelper.getActionProcessor().schedule(command);
     }
 
-    private CoordinatesWorld calcCoordWorld(String lat, String lon) {
-
-        int latDeg = Integer.parseInt(lat.split("\\*")[0]);
-        int latMin = Integer.parseInt(lat.split("\'")[0].split("\\*")[1]);
-        double latSec =  Double.parseDouble(lat.split("\"")[0].split("\'")[1]);
-
-        Latitude latitude = new Latitude(latDeg, latMin, latSec);
-
-        int lonDeg = Integer.parseInt(lon.split("\\*")[0]);
-        int lonMin = Integer.parseInt(lon.split("\'")[0].split("\\*")[1]);
-        double lonSec =  Double.parseDouble(lon.split("\"")[0].split("\'")[1]);
-
-        Longitude longitude = new Longitude(lonDeg, lonMin, lonSec);
-
-        return new CoordinatesWorld(latitude, longitude);
-    }
 
 }
