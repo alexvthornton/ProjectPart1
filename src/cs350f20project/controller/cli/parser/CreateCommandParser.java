@@ -1,8 +1,5 @@
 package cs350f20project.controller.cli.parser;
 
-import cs350f20project.datatype.CoordinatesWorld;
-import cs350f20project.datatype.Latitude;
-import cs350f20project.datatype.Longitude;
 
 public class CreateCommandParser extends CommandParser {
 
@@ -17,6 +14,10 @@ public class CreateCommandParser extends CommandParser {
 
     public void parse(){
 
+        if(commandArr.length<2){
+            throw new RuntimeException("invalid create command");
+        }
+
         if(commandArr[1].equalsIgnoreCase("power")){
             power();
         }
@@ -26,9 +27,16 @@ public class CreateCommandParser extends CommandParser {
         else if(commandArr[1].equalsIgnoreCase("track")){
             track();
         }
+        else{
+            throw new RuntimeException("invalid create command");
+        }
     }
 
     private void power(){
+
+        if(commandArr.length<3){
+            throw new RuntimeException("invalid create power command");
+        }
 
         CreatePowerCommandParser power = new CreatePowerCommandParser(super.parserHelper, commandText);
 
@@ -44,10 +52,17 @@ public class CreateCommandParser extends CommandParser {
         else if(commandArr[2].equalsIgnoreCase("substation")){
             power.parseSubstation();
         }
+        else{
+            throw new RuntimeException("invalid create power command");
+        }
     }
 
 
     private void stock(){
+
+        if(commandArr.length<3){
+            throw new RuntimeException("invalid create stock command");
+        }
 
         CreateStockCommandParser stock = new CreateStockCommandParser(super.parserHelper, commandText);
 
@@ -57,9 +72,16 @@ public class CreateCommandParser extends CommandParser {
         else if(commandArr[2].equalsIgnoreCase("engine")){
             stock.parseEngine();
         }
+        else{
+            throw new RuntimeException("invalid create stock command");
+        }
     }
 
     private void track(){
+
+        if(commandArr.length<3){
+            throw new RuntimeException("invalid create track command");
+        }
 
         CreateTrackCommandParser track = new CreateTrackCommandParser(super.parserHelper, commandText);
 
@@ -77,6 +99,9 @@ public class CreateCommandParser extends CommandParser {
         }
         else if(commandArr[2].equalsIgnoreCase("switch")){
             track.parseSwitch();
+        }
+        else{
+            throw new RuntimeException("invalid create track command");
         }
 
     }

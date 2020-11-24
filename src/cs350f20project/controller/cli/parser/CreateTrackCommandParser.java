@@ -113,7 +113,7 @@ public class CreateTrackCommandParser extends CreateCommandParser{
     }
 
     public void parseSwitch(){
-
+        
     }
 
 }
