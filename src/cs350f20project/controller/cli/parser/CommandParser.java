@@ -11,7 +11,7 @@ public class CommandParser {
 
     public CommandParser(MyParserHelper parserHelper, String commandText){
         this.parserHelper = parserHelper;
-        this.commands = commandText.replaceAll(" +|\\t+", " ").split(";");
+        this.commands = commandText.replaceAll("\\t+|\\s+", " ").split(";");
     }
 
     public void parse(){
@@ -35,6 +35,10 @@ public class CommandParser {
                 ccp.parse();
             } else if(commandText.substring(0,3).equalsIgnoreCase("use")){
                 use(commandText);
+            }
+            else {
+            	MiscCommandParser miscCParser = new MiscCommandParser(parserHelper, commandText);
+            	miscCParser.parse();
             }
         }
     }
