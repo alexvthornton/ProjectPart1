@@ -8,11 +8,6 @@ import cs350f20project.controller.command.creational.CommandCreatePowerStation;
 import cs350f20project.controller.command.creational.CommandCreatePowerSubstation;
 import cs350f20project.datatype.CoordinatesWorld;
 import cs350f20project.datatype.CoordinatesDelta;
-import cs350f20project.datatype.Latitude;
-import cs350f20project.datatype.Longitude;
-
-import javax.sound.midi.Soundbank;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,7 +69,6 @@ public class CreatePowerCommandParser extends CreateCommandParser{
         CoordinatesWorld cw;
         if(super.commandArr[5].charAt(0)=='$'){
             cw = parserHelper.getReference(super.commandArr[5].substring(1));
-            System.out.println("got string");
         }
         else {
             String[] latAndLon = super.commandArr[5].split("/");
@@ -107,8 +101,14 @@ public class CreatePowerCommandParser extends CreateCommandParser{
 
         String id1 = super.commandArr[3];
 
-        String [] latAndLon = super.commandArr[5].split("/");
-        CoordinatesWorld cw = super.calcCoordWorld(latAndLon[0], latAndLon[1]);
+        CoordinatesWorld cw;
+        if(super.commandArr[5].charAt(0)=='$'){
+            cw = parserHelper.getReference(super.commandArr[5].substring(1));
+        }
+        else {
+            String[] latAndLon = super.commandArr[5].split("/");
+            cw = calcCoordWorld(latAndLon[0], latAndLon[1]);
+        }
 
         String [] coordDelta = super.commandArr[7].split(":");
         Double x = Double.parseDouble(coordDelta[0]);
@@ -120,7 +120,6 @@ public class CreatePowerCommandParser extends CreateCommandParser{
         for(int i = 10; i < super.commandArr.length; i++){
             idList.add(super.commandArr[i]);
         }
-
 
         A_Command command = new CommandCreatePowerSubstation(id1, cw, cd, idList);
         this.parserHelper.getActionProcessor().schedule(command);

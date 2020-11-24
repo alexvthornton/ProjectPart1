@@ -23,8 +23,14 @@ public class CreateTrackCommandParser extends CreateCommandParser{
 
         String id1 = super.commandArr[3];
 
-        String [] latAndLon = super.commandArr[5].split("/");
-        CoordinatesWorld cw = super.calcCoordWorld(latAndLon[0], latAndLon[1]);
+        CoordinatesWorld cw;
+        if(super.commandArr[5].charAt(0)=='$'){
+            cw = parserHelper.getReference(super.commandArr[5].substring(1));
+        }
+        else {
+            String[] latAndLon = super.commandArr[5].split("/");
+            cw = calcCoordWorld(latAndLon[0], latAndLon[1]);
+        }
 
         String [] coordDelta1 = super.commandArr[8].split(":");
         Double x1 = Double.parseDouble(coordDelta1[0]);
@@ -79,8 +85,14 @@ public class CreateTrackCommandParser extends CreateCommandParser{
 
         String id1 = super.commandArr[3];
 
-        String [] latAndLon = super.commandArr[5].split("/");
-        CoordinatesWorld cw = super.calcCoordWorld(latAndLon[0], latAndLon[1]);
+        CoordinatesWorld cw;
+        if(super.commandArr[5].charAt(0)=='$'){
+            cw = parserHelper.getReference(super.commandArr[5].substring(1));
+        }
+        else {
+            String[] latAndLon = super.commandArr[5].split("/");
+            cw = calcCoordWorld(latAndLon[0], latAndLon[1]);
+        }
 
         String [] coordDelta1 = super.commandArr[8].split(":");
         Double x1 = Double.parseDouble(coordDelta1[0]);
