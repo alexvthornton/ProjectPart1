@@ -1,6 +1,5 @@
 package cs350f20project.controller.cli.parser;
 
-import cs350f20project.controller.cli.TrackLocator;
 import cs350f20project.controller.command.A_Command;
 import cs350f20project.controller.command.PointLocator;
 import cs350f20project.controller.command.creational.CommandCreateTrackCurve;
