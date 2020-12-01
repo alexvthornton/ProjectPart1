@@ -7,7 +7,7 @@ import cs350f20project.controller.command.creational.CommandCreateTrackLayout;
 import cs350f20project.controller.command.creational.CommandCreateTrackRoundhouse;
 import cs350f20project.controller.command.creational.CommandCreateTrackSwitchTurnout;
 import cs350f20project.controller.command.creational.CommandCreateTrackSwitchWye;
-import cs350f20project.controller.command.creational.CommandCreateTrackStraight
+import cs350f20project.controller.command.creational.CommandCreateTrackStraight;
 import cs350f20project.datatype.Angle;
 import cs350f20project.datatype.CoordinatesDelta;
 import cs350f20project.datatype.CoordinatesWorld;
