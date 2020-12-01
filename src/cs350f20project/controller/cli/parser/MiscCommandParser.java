@@ -2,9 +2,12 @@ package cs350f20project.controller.cli.parser;
 
 import cs350f20project.controller.cli.TrackLocator;
 import cs350f20project.controller.command.A_Command;
+import cs350f20project.controller.command.meta.CommandMetaViewGenerate;
 import cs350f20project.controller.command.structural.CommandStructuralCommit;
 import cs350f20project.controller.command.structural.CommandStructuralCouple;
 import cs350f20project.controller.command.structural.CommandStructuralLocate;
+import cs350f20project.datatype.CoordinatesScreen;
+import cs350f20project.datatype.CoordinatesWorld;
 
 public class MiscCommandParser extends CommandParser{
 	
@@ -43,8 +46,30 @@ public class MiscCommandParser extends CommandParser{
 	 private void open() {
 		 enteredCommand = commandArr[0] + " " + commandArr[1] + " " + commandArr[3] + " " + commandArr[5] + " " + commandArr[6] + " " + commandArr[8] + " " + commandArr[9] + " " + commandArr[11];
 		 if(commandOpen.equalsIgnoreCase(enteredCommand)) {
-			 
+			 String viewId = commandArr[2];
+			 CoordinatesWorld coordsWorld;
+			 if(commandArr[4].charAt(0) == '$') {
+				 coordsWorld = parserHelper.getReference(commandArr[4].substring(1));
+			 }
+			 else {
+				 String[] latAndLon = commandArr[4].split("/");
+				 coordsWorld = calcCoordWorld(latAndLon[0], latAndLon[1]);//maybe have check to see if it is correct length of 2
+			 }
+		     int worldWidth, screenWidth, screenHeight;
+		     try {
+		    	 worldWidth = Integer.parseInt(commandArr[7]);
+		    	 screenWidth = Integer.parseInt(commandArr[10]);
+		    	 screenHeight = Integer.parseInt(commandArr[12]);
+		     } catch (Exception e) {
+		    	 throw new RuntimeException("Invalid number input");
+		     }
+			 CoordinatesScreen screenSize = new CoordinatesScreen(screenWidth, screenHeight);
+			 this.command = new CommandMetaViewGenerate(viewId, coordsWorld, worldWidth, screenSize);
+			 this.parserHelper.getActionProcessor().schedule(this.command);
 		 }
+		 else {
+			 throw new RuntimeException("Invalid Command!");
+		 }	
 	 }
 	 
 	 private void commit() {
