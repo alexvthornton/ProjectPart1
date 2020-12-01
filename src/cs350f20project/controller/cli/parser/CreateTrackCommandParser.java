@@ -1,12 +1,13 @@
 package cs350f20project.controller.cli.parser;
 
-import cs350f20project.controller.cli.TrackLocator;
 import cs350f20project.controller.command.A_Command;
+import cs350f20project.controller.command.PointLocator;
 import cs350f20project.controller.command.creational.CommandCreateTrackCurve;
 import cs350f20project.controller.command.creational.CommandCreateTrackLayout;
 import cs350f20project.controller.command.creational.CommandCreateTrackRoundhouse;
 import cs350f20project.controller.command.creational.CommandCreateTrackSwitchTurnout;
 import cs350f20project.controller.command.creational.CommandCreateTrackSwitchWye;
+import cs350f20project.controller.command.creational.CommandCreateTrackStraight
 import cs350f20project.datatype.Angle;
 import cs350f20project.datatype.CoordinatesDelta;
 import cs350f20project.datatype.CoordinatesWorld;
@@ -22,7 +23,13 @@ public class CreateTrackCommandParser extends CreateCommandParser{
     }
 
     public void parseCurve(){
-        //CREATE TRACK CURVE id1 REFERENCE ( coordinates_world | ( '$' id2 ) ) DELTA START coordinates_delta1 END coordinates_delta2 ( ( DISTANCE ORIGIN number ) | ( ORIGIN coordinates_delta3 ) )
+
+        //create track curve curveID1 reference 34*25'21.4"/45*11'34.2" delta start 10.4:1 end 2:39.1 origin 20:10
+        boolean matches = super.commandText.toLowerCase().matches("create track curve \\w+ reference (\\d+\\*\\d+'(\\d+(\\.\\d+)?)\"/\\d+\\*\\d+'(\\d+(\\.\\d+)?)\"|\\$\\w+) delta start (\\d+(\\.\\d+)?):(\\d+(\\.\\d+)?) end (\\d+(\\.\\d+)?):(\\d+(\\.\\d+)?) (distance origin (\\d+(\\.\\d+)?)|origin (\\d+(\\.\\d+)?):(\\d+(\\.\\d+)?))");
+
+        if(!matches) {
+            throw new RuntimeException("Invalid create track curve command");
+        }
 
         String id1 = super.commandArr[3];
 
@@ -66,10 +73,49 @@ public class CreateTrackCommandParser extends CreateCommandParser{
     }
 
     public void parseStraight(){
+        //create track straight straightTrackID19 reference 34*25'21.4"/45*11'34.2" delta start 10.4:1 end 2:39.1
+        boolean matches = super.commandText.toLowerCase().matches("create track straight \\w+ reference (\\d+\\*\\d+'(\\d+(\\.\\d+)?)\"/\\d+\\*\\d+'(\\d+(\\.\\d+)?)\"|\\$\\w+) delta start (\\d+(\\.\\d+)?):(\\d+(\\.\\d+)?) end (\\d+(\\.\\d+)?):(\\d+(\\.\\d+)?)");
+
+        if(!matches) {
+            throw new RuntimeException("Invalid create track curve command");
+        }
+
+        String id1 = super.commandArr[3];
+
+        CoordinatesWorld cw;
+        if(super.commandArr[5].charAt(0)=='$'){
+            cw = parserHelper.getReference(super.commandArr[5].substring(1));
+        }
+        else {
+            String[] latAndLon = super.commandArr[5].split("/");
+            cw = calcCoordWorld(latAndLon[0], latAndLon[1]);
+        }
+
+        String [] coordDelta1 = super.commandArr[8].split(":");
+        Double x1 = Double.parseDouble(coordDelta1[0]);
+        Double y1 = Double.parseDouble(coordDelta1[1]);
+        CoordinatesDelta cd1 = new CoordinatesDelta(x1, y1);
+
+        String [] coordDelta2 = super.commandArr[10].split(":");
+        Double x2 = Double.parseDouble(coordDelta2[0]);
+        Double y2 = Double.parseDouble(coordDelta2[1]);
+        CoordinatesDelta cd2 = new CoordinatesDelta(x2, y2);
+
+        PointLocator pl = new PointLocator(cw, cd1, cd2);
+
+        A_Command command = new CommandCreateTrackStraight(id1, pl);
+
+        this.parserHelper.getActionProcessor().schedule(command);
 
     }
 
     public void parseLayout(){
+        //create track layout trackLayoutID with tracks trackID1 trackID2
+        boolean matches = super.commandText.toLowerCase().matches("create track layout \\w+ with tracks \\w+(( \\w+)+)?");
+
+        if(!matches) {
+            throw new RuntimeException("Invalid create track layout command");
+        }
 
         String id1 = super.commandArr[3];
 
@@ -85,6 +131,12 @@ public class CreateTrackCommandParser extends CreateCommandParser{
     }
 
     public void parseRoundhouse(){
+
+        boolean matches = super.commandText.toLowerCase().matches("create track roundhouse \\w+ reference (\\d+\\*\\d+'(\\d+(\\.\\d+)?)\"/\\d+\\*\\d+'(\\d+(\\.\\d+)?)\"|\\$\\w+) delta origin (\\d+(\\.\\d+)?):(\\d+(\\.\\d+)?) angle entry \\d+(\\.\\d+)? start \\d+(\\.\\d+)? end \\d+(\\.\\d+)? with \\d+ spurs length \\d+(\\.\\d+)? turntable length \\d+(\\.\\d+)?");
+
+        if(!matches) {
+            throw new RuntimeException("Invalid create track curve command");
+        }
 
         String id1 = super.commandArr[3];
 

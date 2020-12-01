@@ -16,7 +16,6 @@ public class CommandParser {
 
     public void parse(){
 
-
         System.out.println("Alex and Miguel's parser!");
 
         for(int i = 0; i < commands.length; i++) {
@@ -77,17 +76,6 @@ public class CommandParser {
 
         parserHelper.addReference(id, cw);
     }
-
-    /*
-    other cases that must be handled
-
-    open
-    commit
-    couple
-    locate
-    use
-    Rule#2throughRule#65
-
-     */
+    
 
 }
