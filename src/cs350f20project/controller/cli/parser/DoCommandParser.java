@@ -42,9 +42,9 @@ public class DoCommandParser extends CommandParser{
     		
     		String id = commandArr[3];
     		boolean primaryElseSecondary = false;
-    		if(commandArr[5].equals("primary"))
+    		if(commandArr[5].equalsIgnoreCase("primary"))
     			primaryElseSecondary = true;
-    		else if(commandArr[5].equals("secondary"))
+    		else if(commandArr[5].equalsIgnoreCase("secondary"))
     			primaryElseSecondary = false;
     		else {
     			throw new RuntimeException(commandArr[5] + " not recognized, must be PRIMARY or SECONDARY");
