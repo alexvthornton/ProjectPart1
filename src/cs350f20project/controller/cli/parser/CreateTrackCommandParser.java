@@ -135,7 +135,7 @@ public class CreateTrackCommandParser extends CreateCommandParser{
         boolean matches = super.commandText.toLowerCase().matches("create track roundhouse \\w+ reference (\\d+\\*\\d+'(\\d+(\\.\\d+)?)\"/\\d+\\*\\d+'(\\d+(\\.\\d+)?)\"|\\$\\w+) delta origin (\\d+(\\.\\d+)?):(\\d+(\\.\\d+)?) angle entry \\d+(\\.\\d+)? start \\d+(\\.\\d+)? end \\d+(\\.\\d+)? with \\d+ spurs length \\d+(\\.\\d+)? turntable length \\d+(\\.\\d+)?");
 
         if(!matches) {
-            throw new RuntimeException("Invalid create track curve command");
+            throw new RuntimeException("Invalid create track round House command");
         }
 
         String id1 = super.commandArr[3];

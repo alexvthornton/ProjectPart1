@@ -42,9 +42,6 @@ public class CreateStockCommandParser extends CreateCommandParser{
         if(!matches) {
             throw new RuntimeException("Invalid create stock engine command");
         }
-        else{
-            System.out.println("matches");
-        }
 
         String id1 = super.commandArr[3];
 
