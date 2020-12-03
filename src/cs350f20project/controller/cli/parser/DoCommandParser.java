@@ -19,13 +19,13 @@ public class DoCommandParser extends CommandParser{
     public void parse(){
 
         String[] commandArr = commandText.split(" ");
-        if(commandArr[1].equals("select") && commandArr.length == 6){
+        if(commandArr[1].equalsIgnoreCase("select") && commandArr.length == 6){
             select(commandArr);
         }
-        else if(commandArr[1].equals("set") && commandArr.length == 5){
+        else if(commandArr[1].equalsIgnoreCase("set") && commandArr.length == 5){
             set(commandArr);
         }
-        else if(commandArr[1].equals("brake") && commandArr.length == 3){
+        else if(commandArr[1].equalsIgnoreCase("brake") && commandArr.length == 3){
         	String engineId;
             engineId = commandArr[2];
         	this.command = new CommandBehavioralBrake(engineId);
@@ -62,7 +62,7 @@ public class DoCommandParser extends CommandParser{
     	String id;
     	this.command = null;
     	
-    	if(commandArr[3].equals("direction")) {
+    	if(commandArr[3].equalsIgnoreCase("direction")) {
     		
     		enteredCommand = commandArr[0] + " " + commandArr[1] + " " + commandArr[3];
     		if(command11.equalsIgnoreCase(enteredCommand)){
@@ -80,7 +80,7 @@ public class DoCommandParser extends CommandParser{
     		}//
     		
     	}//end direction if
-    	else if(commandArr[2].equals("reference")) {
+    	else if(commandArr[2].equalsIgnoreCase("reference")) {
     		
     		enteredCommand = commandArr[0] + " " + commandArr[1] + " " + commandArr[2] + " " + commandArr[3];
     		if(command12.equalsIgnoreCase(enteredCommand)){
@@ -89,7 +89,7 @@ public class DoCommandParser extends CommandParser{
     		}//
     		
     	}//end reference if
-    	else if(commandArr[3].equals("speed")) {
+    	else if(commandArr[3].equalsIgnoreCase("speed")) {
     		
     		enteredCommand = commandArr[0] + " " + commandArr[1] + " " + commandArr[3];
     		if(command15.equalsIgnoreCase(enteredCommand)){
