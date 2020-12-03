@@ -69,9 +69,9 @@ public class DoCommandParser extends CommandParser{
     			//check if engine is in motion?
     			id = commandArr[2];
     			boolean forwardOrBackward;
-    			if(commandArr[4].equals("forward"))
+    			if(commandArr[4].equalsIgnoreCase("forward"))
     				forwardOrBackward = true;
-    			else if(commandArr[4].equals("backward"))
+    			else if(commandArr[4].equalsIgnoreCase("backward"))
     				forwardOrBackward = false;
     			else {
     				throw new RuntimeException(commandArr[4] + " not recognized, must be FORWARD or BACKWARD");
