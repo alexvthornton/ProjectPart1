@@ -62,7 +62,7 @@ public class CommandParser {
     private void use(String command){
         // use ref1 as reference 24*19'25.4"/15*28'21.8"
 
-        boolean matches = command.toLowerCase().matches("use \\w+ as reference \\d+\\*\\d+'(\\d+(\\.\\d+)?)\"/\\d+\\*\\d+'(\\d+(\\.\\d+)?)\"");
+        boolean matches = command.toLowerCase().matches("use \\w+ as reference -?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"/-?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"");
 
         if(!matches) {
             throw new RuntimeException("Invalid use id as reference command");

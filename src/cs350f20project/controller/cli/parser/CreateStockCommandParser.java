@@ -37,7 +37,7 @@ public class CreateStockCommandParser extends CreateCommandParser{
 
     public void parseEngine(){
         //CREATE STOCK ENGINE id1 AS DIESEL ON TRACK id2 DISTANCE number FROM ( START | END ) FACING ( START | END )
-        boolean matches = super.commandText.toLowerCase().matches("create stock engine \\w+ as diesel on track \\w+ distance (\\d+(\\.\\d+)?) from (start|end) facing (start|end)");
+        boolean matches = super.commandText.toLowerCase().matches("create stock engine \\w+ as diesel on track \\w+ distance (-?\\d+(\\.\\d+)?) from (start|end) facing (start|end)");
 
         if(!matches) {
             throw new RuntimeException("Invalid create stock engine command");
