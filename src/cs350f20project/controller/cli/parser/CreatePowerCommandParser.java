@@ -37,7 +37,7 @@ public class CreatePowerCommandParser extends CreateCommandParser{
     }
 
     public void parsePole(){
-        boolean matches = super.commandText.toLowerCase().matches("create power pole \\w+ on track \\w+ distance (-?\\d+(\\.\\d+)?) from (start|end)");
+        boolean matches = super.commandText.toLowerCase().matches("create power pole \\w+ on track \\w+ distance ((\\+|-)?\\d+(\\.\\d+)?) from (start|end)");
 
         if(!matches) {
             throw new RuntimeException("Invalid create power pole command");
@@ -58,7 +58,7 @@ public class CreatePowerCommandParser extends CreateCommandParser{
     public void parseStation(){
         // create power station firstID reference 34*25'21.4"/45*11'34.2" delta 10.6:9 with substations ID1 ID2 ID3 ID4
 
-        boolean matches = super.commandText.toLowerCase().matches("create power station \\w+ reference (-?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"/-?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"|\\$\\w+) delta (-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?) with (substations|substation) \\w+(( \\w+)+)?");
+        boolean matches = super.commandText.toLowerCase().matches("create power station \\w+ reference ((\\+|-)?\\d+\\*(\\+|-)?\\d+'((\\+|-)?\\d+(\\.\\d+)?)\"/(\\+|-)?\\d+\\*(\\+|-)?\\d+'((\\+|-)?\\d+(\\.\\d+)?)\"|\\$\\w+) delta ((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?) with (substations|substation) \\w+(( \\w+)+)?");
 
         if(!matches) {
             throw new RuntimeException("Invalid create power station command");
@@ -93,7 +93,7 @@ public class CreatePowerCommandParser extends CreateCommandParser{
 
     public void parseSubstation(){
         // create power substation firstID reference 34*25'21.4"/45*11'34.2" delta 10.6:9 with catenaries ID1 ID2 ID3 ID4
-        boolean matches = super.commandText.toLowerCase().matches("create power substation \\w+ reference (-?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"/-?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"|\\$\\w+) delta (-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?) with catenaries \\w+(( \\w+)+)?");
+        boolean matches = super.commandText.toLowerCase().matches("create power substation \\w+ reference ((\\+|-)?\\d+\\*(\\+|-)?\\d+'((\\+|-)?\\d+(\\.\\d+)?)\"/(\\+|-)?\\d+\\*(\\+|-)?\\d+'((\\+|-)?\\d+(\\.\\d+)?)\"|\\$\\w+) delta ((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?) with catenaries \\w+(( \\w+)+)?");
 
         if(!matches) {
             throw new RuntimeException("Invalid create power station command");

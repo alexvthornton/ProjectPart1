@@ -25,7 +25,7 @@ public class CreateTrackCommandParser extends CreateCommandParser{
     public void parseCurve(){
 
         //create track curve curveID1 reference 34*25'21.4"/45*11'34.2" delta start 10.4:1 end 2:39.1 origin 20:10
-        boolean matches = super.commandText.toLowerCase().matches("create track curve \\w+ reference (-?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"/-?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"|\\$\\w+) delta start (-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?) end (-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?) (distance origin (-?\\d+(\\.\\d+)?)|origin (-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?))");
+        boolean matches = super.commandText.toLowerCase().matches("create track curve \\w+ reference ((\\+|-)?\\d+\\*(\\+|-)?\\d+'((\\+|-)?\\d+(\\.\\d+)?)\"/(\\+|-)?\\d+\\*(\\+|-)?\\d+'((\\+|-)?\\d+(\\.\\d+)?)\"|\\$\\w+) delta start ((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?) end ((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?) (distance origin ((\\+|-)?\\d+(\\.\\d+)?)|origin ((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?))");
 
         if(!matches) {
             throw new RuntimeException("Invalid create track curve command");
@@ -74,7 +74,7 @@ public class CreateTrackCommandParser extends CreateCommandParser{
 
     public void parseStraight(){
         //create track straight straightTrackID19 reference 34*25'21.4"/45*11'34.2" delta start 10.4:1 end 2:39.1
-        boolean matches = super.commandText.toLowerCase().matches("create track straight \\w+ reference (-?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"/-?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"|\\$\\w+) delta start (-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?) end (-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?)");
+        boolean matches = super.commandText.toLowerCase().matches("create track straight \\w+ reference ((\\+|-)?\\d+\\*(\\+|-)?\\d+'((\\+|-)?\\d+(\\.\\d+)?)\"/(\\+|-)?\\d+\\*(\\+|-)?\\d+'((\\+|-)?\\d+(\\.\\d+)?)\"|\\$\\w+) delta start ((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?) end ((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?)");
 
         if(!matches) {
             throw new RuntimeException("Invalid create track curve command");
@@ -132,7 +132,7 @@ public class CreateTrackCommandParser extends CreateCommandParser{
 
     public void parseRoundhouse(){
 
-        boolean matches = super.commandText.toLowerCase().matches("create track roundhouse \\w+ reference (-?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"/-?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"|\\$\\w+) delta origin (-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?) angle entry -?\\d+(\\.\\d+)? start -?\\d+(\\.\\d+)? end -?\\d+(\\.\\d+)? with -?\\d+ spurs length -?\\d+(\\.\\d+)? turntable length -?\\d+(\\.\\d+)?");
+        boolean matches = super.commandText.toLowerCase().matches("create track roundhouse \\w+ reference ((\\+|-)?\\d+\\*(\\+|-)?\\d+'((\\+|-)?\\d+(\\.\\d+)?)\"/(\\+|-)?\\d+\\*(\\+|-)?\\d+'((\\+|-)?\\d+(\\.\\d+)?)\"|\\$\\w+) delta origin ((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?) angle entry (\\+|-)?\\d+(\\.\\d+)? start (\\+|-)?\\d+(\\.\\d+)? end (\\+|-)?\\d+(\\.\\d+)? with (\\+|-)?\\d+ spurs length (\\+|-)?\\d+(\\.\\d+)? turntable length (\\+|-)?\\d+(\\.\\d+)?");
 
         if(!matches) {
             throw new RuntimeException("Invalid create track round House command");
@@ -180,8 +180,8 @@ public class CreateTrackCommandParser extends CreateCommandParser{
     }
     
     private void parseSwitchTurnout() {
-    	boolean matches = super.commandText.toLowerCase().matches("create track switch turnout \\w+ reference (-?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"/-?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"|\\$\\w+) "
-    			+ "straight delta start (-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?) end (-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?) curve delta start (-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?) end (-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?) distance origin -?\\d+(\\.\\d+)?");
+    	boolean matches = super.commandText.toLowerCase().matches("create track switch turnout \\w+ reference ((\\+|-)?\\d+\\*(\\+|-)?\\d+'((\\+|-)?\\d+(\\.\\d+)?)\"/(\\+|-)?\\d+\\*(\\+|-)?\\d+'((\\+|-)?\\d+(\\.\\d+)?)\"|\\$\\w+) "
+    			+ "straight delta start ((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?) end ((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?) curve delta start ((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?) end ((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?) distance origin (\\+|-)?\\d+(\\.\\d+)?");
     	
     	if(!matches) {
     		throw new RuntimeException("Invalid create track switch turnout command!");
@@ -226,9 +226,9 @@ public class CreateTrackCommandParser extends CreateCommandParser{
     }//end parseSwitchTurnout()
     
     private void parseSwitchWye() {
-    	boolean matches = super.commandText.toLowerCase().matches("create track switch wye \\w+ reference (-?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"/-?\\d+\\*-?\\d+'(-?\\d+(\\.\\d+)?)\"|\\$\\w+) delta start "
-    			+ "(-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?) end (-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?) distance origin -?\\d+(\\.\\d+)? delta start (-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?) end (-?\\d+(\\.\\d+)?):(-?\\d+(\\.\\d+)?) "
-    			+ "distance origin -?\\d+(\\.\\d+)?");
+    	boolean matches = super.commandText.toLowerCase().matches("create track switch wye \\w+ reference ((\\+|-)?\\d+\\*(\\+|-)?\\d+'((\\+|-)?\\d+(\\.\\d+)?)\"/(\\+|-)?\\d+\\*(\\+|-)?\\d+'((\\+|-)?\\d+(\\.\\d+)?)\"|\\$\\w+) delta start "
+    			+ "((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?) end ((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?) distance origin (\\+|-)?\\d+(\\.\\d+)? delta start ((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?) end ((\\+|-)?\\d+(\\.\\d+)?):((\\+|-)?\\d+(\\.\\d+)?) "
+    			+ "distance origin (\\+|-)?\\d+(\\.\\d+)?");
     	if(!matches) {
     		throw new RuntimeException("Invalid create track switch wye command!");
     	}
