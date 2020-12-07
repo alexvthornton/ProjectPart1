@@ -29,10 +29,10 @@ public class CommandParser {
             } else if (commandText.charAt(0) == 'd' || commandText.charAt(0) == 'D' ) {
                 DoCommandParser dcp = new DoCommandParser(parserHelper, commandText);
                 dcp.parse();
-            } else if (commandText.substring(0, 6).equalsIgnoreCase("create")) {
+            } else if (commandText.length() > 5 && commandText.substring(0, 6).equalsIgnoreCase("create")) {
                 CreateCommandParser ccp = new CreateCommandParser(parserHelper, commandText);
                 ccp.parse();
-            } else if(commandText.substring(0,3).equalsIgnoreCase("use")){
+            } else if(commandText.length() > 2 && commandText.substring(0,3).equalsIgnoreCase("use")){
                 use(commandText);
             }
             else {

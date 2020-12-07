@@ -20,20 +20,22 @@ public class AtCommandParser extends CommandParser{
         if(secondPart.equalsIgnoreCase("run")){
         	runFile();
         }
-        else if(secondPart.equalsIgnoreCase("schedule")) {
-        	
-        }
         else {
         	throw new RuntimeException(commandText + " not recognized!");
         }
     }
     
     private void runFile() {
+    	String fileString = commandText.substring(4).trim();
+    	
     	String fileName = "";
-    	try {
-    		fileName = commandText.split(" ")[1];
-    	} catch (Exception e) {
-    		throw new RuntimeException("Missing File Name!");
+    	if(!fileString.isBlank() && (fileString.charAt(0) == '\'' && fileString.charAt(fileString.length()-1) == '\'')) {
+    		fileName = fileString.substring(1, fileString.length()-1).trim();
+    		if(fileName.isBlank())
+    			throw new RuntimeException("File Name passed in is empty");
+    	}
+    	else {
+    		throw new RuntimeException("File " + fileString + " Not A Valid Input!");
     	}
 
         this.command = new CommandMetaDoRun(fileName);
@@ -41,3 +43,4 @@ public class AtCommandParser extends CommandParser{
     }
 
 }
+

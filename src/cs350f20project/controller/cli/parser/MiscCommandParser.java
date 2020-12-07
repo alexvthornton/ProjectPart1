@@ -26,16 +26,16 @@ public class MiscCommandParser extends CommandParser{
 	 
 	 public void parse() {
 		 
-		 if(commandArr[0].equalsIgnoreCase("open") && commandArr.length == 13){
+		 if(commandArr.length == 13 && commandArr[0].equalsIgnoreCase("open")){
 			 open();
 	     }
 	     else if(commandArr[0].equalsIgnoreCase("commit")){
 	        	commit();
 	     }
-	     else if(commandArr[0].equalsIgnoreCase("couple") && commandArr.length == 5){
+	     else if(commandArr.length == 5 && commandArr[0].equalsIgnoreCase("couple")){
 	    	 couple();
 	     }
-	     else if(commandArr[0].equalsIgnoreCase("locate") && commandArr.length == 10){
+	     else if(commandArr.length == 10 && commandArr[0].equalsIgnoreCase("locate")){
 	    	 locate();
 	     }
 	     else {
@@ -53,7 +53,10 @@ public class MiscCommandParser extends CommandParser{
 			 }
 			 else {
 				 String[] latAndLon = commandArr[4].split("/");
-				 coordsWorld = calcCoordWorld(latAndLon[0], latAndLon[1]);//maybe have check to see if it is correct length of 2
+				 if(latAndLon.length != 2) 
+					 throw new RuntimeException("Invalid World Coordinate for OPEN VIEW command");
+				 
+				 coordsWorld = calcCoordWorld(latAndLon[0], latAndLon[1]);
 			 }
 		     int worldWidth, screenWidth, screenHeight;
 		     try {
@@ -68,7 +71,7 @@ public class MiscCommandParser extends CommandParser{
 			 this.parserHelper.getActionProcessor().schedule(this.command);
 		 }
 		 else {
-			 throw new RuntimeException("Invalid Command!");
+			 throw new RuntimeException("Invalid OPEN VIEW Command!");
 		 }	
 	 }
 	 
@@ -85,7 +88,7 @@ public class MiscCommandParser extends CommandParser{
 			 this.parserHelper.getActionProcessor().schedule(this.command);
 		 }
 		 else {
-			 throw new RuntimeException("Invalid Command!");
+			 throw new RuntimeException("Invalid COUPLE STOCK Command!");
 		 }	 
 	 }
 	 
@@ -114,7 +117,7 @@ public class MiscCommandParser extends CommandParser{
 			  this.parserHelper.getActionProcessor().schedule(this.command);
 		 }
 		 else {
-			 throw new RuntimeException("Invalid Command!");
+			 throw new RuntimeException("Invalid LOCATE STOCK Command!");
 		 } 
 	 }
 }
