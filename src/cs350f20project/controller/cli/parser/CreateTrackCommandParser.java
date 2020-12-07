@@ -204,18 +204,18 @@ public class CreateTrackCommandParser extends CreateCommandParser{
     	CoordinatesDelta delta1Start = new CoordinatesDelta(x1, y1);
     	
     	String[] coordDelta2 = super.commandArr[12].split(":");
-    	Double x2 = Double.parseDouble(coordDelta1[0]);
-    	Double y2 = Double.parseDouble(coordDelta1[1]);
+    	Double x2 = Double.parseDouble(coordDelta2[0]);
+    	Double y2 = Double.parseDouble(coordDelta2[1]);
     	CoordinatesDelta delta1End = new CoordinatesDelta(x2, y2);
     	
     	String[] coordDelta3 = super.commandArr[16].split(":");
-    	Double x3 = Double.parseDouble(coordDelta1[0]);
-    	Double y3 = Double.parseDouble(coordDelta1[1]);
+    	Double x3 = Double.parseDouble(coordDelta3[0]);
+    	Double y3 = Double.parseDouble(coordDelta3[1]);
     	CoordinatesDelta delta2Start = new CoordinatesDelta(x3, y3);
     	
     	String[] coordDelta4 = super.commandArr[18].split(":");
-    	Double x4 = Double.parseDouble(coordDelta1[0]);
-    	Double y4 = Double.parseDouble(coordDelta1[1]);
+    	Double x4 = Double.parseDouble(coordDelta4[0]);
+    	Double y4 = Double.parseDouble(coordDelta4[1]);
     	CoordinatesDelta delta2End = new CoordinatesDelta(x4, y4);
     	
     	double distanceOrigin = Double.parseDouble(super.commandArr[21]);

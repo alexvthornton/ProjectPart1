@@ -1,0 +1,14 @@
+USE r1 AS REFERENCE 46*40'58"/117*19'21"
+CREATE TRACK STRAIGHT track1 REFERENCE $r1 DELTA START 0:50 END 50:50
+CREATE TRACK CURVE track2 REFERENCE $r1 DELTA START 50:50 END 50:0 DISTANCE ORIGIN 3
+CREATE TRACK CURVE track3 REFERENCE $r1 DELTA START 0:0 END 0:50  DISTANCE ORIGIN 3
+CREATE TRACK STRAIGHT track4 REFERENCE $r1 DELTA START 0:0 END 10:0
+CREATE TRACK CURVE track6 REFERENCE $r1 DELTA START 15:5 END 20:10 DISTANCE ORIGIN 3
+CREATE TRACK STRAIGHT track7 REFERENCE $r1 DELTA START 20:10 END 30:10
+CREATE TRACK CURVE track8 REFERENCE $r1 DELTA START 30:10 END 35:5 DISTANCE ORIGIN 3
+CREATE TRACK STRAIGHT track10 REFERENCE $r1 DELTA START 40:0 END 50:0
+Create track switch turnout turnout1 reference $r1 straight delta start 25:0 end 40:0 curve delta start 40:0 end 35:5 distance origin 2
+Create track switch turnout turnout2 reference $r1 straight delta start 25:0 end 10:0 curve delta start 15:5 end 10:0 distance origin 2
+Create track Layout layout1 with tracks track1 track2 track3 track4 track6 track7 track8 track10 turnout1 turnout2
+Commit
+OPEN VIEW myView ORIGIN $r1 WORLD WIDTH 200 SCREEN WIDTH 1000 HEIGHT 1000
